@@ -1,14 +1,20 @@
 version: '3'
-
 services:
-###> doctrine/doctrine-bundle ###
+  php:
+    container_name: php-app-pizza
+    build: php8Sf6
+    volumes:
+      - .:/var/www/TheBestPizza
+
   database:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: BestPizza
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: root
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
     ports:
       - "5432"
-###< doctrine/doctrine-bundle ###
-
-###> symfony/mailer ###
-  mailer:
-    image: schickling/mailcatcher
-    ports: [1025, 1080]
-###< symfony/mailer ###
+volumes:
+  db-data:

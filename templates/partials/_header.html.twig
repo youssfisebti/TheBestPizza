@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                {% if app.user %}
+                    {% if 'ROLE_ADMIN' or 'ROLE_CLIENT' in app.user.roles %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_client_public') }}">Voir l'espace public
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_CLIENT') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_allergies_new') }}">Vos allergies
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_admin') }}">Voir l'espace administration
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_pizza_index') }}">Les pizzas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_ingredient_index') }}">Les ingrédients
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            <div class="d-flex">
+                <ul class="navbar-nav me-auto">
+                    {% if app.user %}
+                        <li class="nav-item dropdown" style="margin-right: 5rem;">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-divider"></div>
+                                {% if is_granted('ROLE_ADMIN')  %}
+                                    <a class="dropdown-item" href="{{ path('app_ingredient_index') }}">Les ingrédients</a>
+                                    <a class="dropdown-item" href="{{ path('app_pizza_index') }}">Les pizzas</a>
+                                    <div class="dropdown-divider"></div>
+                                {% endif %}
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">Connexion
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+

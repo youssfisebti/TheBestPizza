@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pizza index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% if not pizzas.items is same as([]) %}
+            <h1 class="p-2 bg-info border">Mes Pizzas</h1>
+
+            <a href="{{ path('app_pizza_new') }}" class="btn btn-primary">
+                Créer une Pizza
+            </a>
+
+            <div class="count mt-4">Il y a
+                {{ pizzas.getTotalItemCount }}
+                ingrédient(s)
+            </div>
+
+            <table class="table table-striped" id="ingredients">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Edition</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pizza in pizzas %}
+                    <tr class="table-primary">
+                        <td>{{ pizza.id }}</td>
+                        <td>{{ pizza.name}}
+                        </td>
+                        <td>
+                            <a href="{{ path('app_pizza_edit', { id: pizza.id }) }}"
+                               class="btn btn-primary mb-2">Modifier</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('app_pizza_show', { id: pizza.id }) }}"
+                               class="btn btn-success">Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation d-flex justify-content-center">
+                {{ knp_pagination_render(pizzas) }}
+            </div>
+        {% else %}
+            <h4>Il n'y a pas de pizza</h4>
+
+            <a href="{{ path('app_pizza_new') }}" class="btn btn-primary">
+                Créer une Pizza
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}

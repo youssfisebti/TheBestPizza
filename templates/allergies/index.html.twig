@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Allergies index{% endblock %}
+
+{% block body %}
+    <h1>Allergies index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for allergy in allergies %}
+            <tr>
+                <td>{{ allergy.id }}</td>
+                <td>
+                    <a href="{{ path('app_allergies_show', {'id': allergy.id}) }}">show</a>
+                    <a href="{{ path('app_allergies_edit', {'id': allergy.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_allergies_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+.creation {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+#ingredients-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-image img {
+    width: 10%;
+}
+
+body {
+    flex-direction: column;
+    display: flex;
+    min-height: 75vh;
+    justify-content: space-between;
+}
+
+
+.btn-submit {
+    margin-top: 100px
+}
+
+.ingredientsCheckbox {
+    min-width: 30%;
+}

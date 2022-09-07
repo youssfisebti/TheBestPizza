@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pizza{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Création d'une pizza</h1>
+        {{ form_start(form) }}
+        <div class="form-group">
+            <h4>{{ form_label(form.name) }}</h4>
+            {{ form_widget(form.name) }}
+            <div class="form-error">
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+        <hr>
+        <div class="form-image">
+            <h4>{{ form_label(form.imageFile) }}</h4>
+            {{ form_widget(form.imageFile) }}
+        </div>
+        <hr>
+        <h4>{{ form_label(form.ingredients) }}</h4>
+        <div id="ingredients-wrapper" class="mt-4">
+            {% for field in form.ingredients %}
+                <div class="ingredientsCheckbox">
+                    {{ form_widget(field) }}
+                    {{ form_label(field) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {{ form_end(form) }}
+        <hr>
+        <a href="{{ path('app_pizza_index') }}" class="btn btn-info mt-4">Annuler</a>
+    </div>
+{% endblock %}

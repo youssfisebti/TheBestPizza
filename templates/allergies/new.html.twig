@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une Allergie{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h1-header">Création d'une allergie</h1>
+
+        {{ form_start(form) }}
+        <div id="ingredients-wrapper">
+            {% for field in form.ingredients %}
+                <div class="ingredientsCheckbox">
+                    {{ form_widget(field) }}
+                    {{ form_label(field) }}
+                </div>
+            {% else %}
+                <h3 class="mt-4">
+                    Nos administrateurs en cours de préparer les ingrédients toutes nos excuses :)
+                </h3>
+            {% endfor %}
+        </div>
+        <div class="form-group btn-submit">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The best Pizza Site{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <section style="background-color: #eee;">
+            <div class="text-center container py-5">
+                <h4 class="mt-4 mb-5"><strong>Nos Pizzas</strong></h4>
+                <div class="row">
+                    {% for pizza in pizzas %}
+                        <div class="col-lg-4 col-md-12 mb-4">
+                            <div class="card">
+                                {% if hasAllergicIngredient(app.user, pizza.id) == true  %}
+                                    <h7 class="text-danger">Cette pizza contient des ingrédients dont vous êtes allergiques !</h7>
+                                {% endif %}
+                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                     data-mdb-ripple-color="light">
+                                    {% if vich_uploader_asset(pizza, 'imageFile') is not null %}
+                                        <img src="{{ vich_uploader_asset(pizza, 'imageFile') }}"
+                                             class="w-100" height="400px"/>
+                                    {% else %}
+                                        <img src="{{ asset('images/coming-soon-header.jpg') }}"
+                                             class="w-100"/>
+                                    {% endif %}
+                                    <a href="{{ path('app_commande') }}">
+                                        <div class="mask">
+                                            {% for ingredient in pizza.ingredients %}
+                                                <div class="d-flex justify-content-start align-items-end h-100">
+                                                    <h5>
+                                                        {% if isAllergic(app.user, ingredient.id) == true %}
+                                                            <span class="badge bg-danger ms-2">{{ ingredient.name }}</span>
+                                                        {% else %}
+                                                            <span class="badge bg-primary ms-2">{{ ingredient.name }}</span>
+                                                        {% endif %}
+                                                    </h5>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="hover-overlay">
+                                            <div class="mask"
+                                                 style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <a href="{{ path('app_commande') }}" class="text-reset">
+                                        <h5 class="card-title mb-3">{{ pizza.name }}</h5>
+                                    </a>
+                                    {% if pizza.price %}
+                                        <h6 class="mb-3">Prix (en €) :{{ pizza.price }}</h6>
+                                    {% else %}
+                                        <h6 class="mb-3">Prix non renseigné</h6>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </section>
+    </div>
+{% endblock %}
