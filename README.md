@@ -1,4 +1,4 @@
-Érapes Pour installer le Projet:
+Steps for installing the Project:
 
 1. git clone git@github.com:youssfisebti/TheBestPizza.git
 2. cd TheBestPizza/
@@ -7,5 +7,3 @@
 5. php bin/console doctrine:schema:update --force
 6. php bin/console doctrine:fixtures:load 
 7. symfony server:start
-be sure in .env you have
-   DATABASE_URL=mysql://root:secret@127.0.0.1:3306/pizza?serverVersion=5.7
