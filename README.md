@@ -20,3 +20,7 @@ OU bien avec docker :)
 7. php bin/console doctrine:fixtures:load
 8. symfony server:start
 9. et depuis votre navigateur http://localhost:8089/
+
+Pour se connecter
+1. Compte admin :  admin --- admin
+2. Compte Client : client --- client
