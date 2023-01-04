@@ -1,15 +1,15 @@
-Steps for installing the Project:
+Steps:
 
-1. git clone git@github.com:youssfisebti/TheBestPizza.git
+1. git clone TheBestPizza  
 2. cd TheBestPizza/
 3. composer install
 4. php bin/console doctrine:database:create
 5. php bin/console doctrine:schema:update --force
 6. php bin/console doctrine:fixtures:load 
-7. symfony php bin/phpunit // pour lancer les tests
-8. symfony server:start // pour lancer le serveur
+7. symfony php bin/phpunit 
+8. symfony server:start 
 
-OU bien avec docker :)
+// docker
 
 1. git clone git@github.com:youssfisebti/TheBestPizza.git
 2. cd TheBestPizza/
